@@ -1,0 +1,9 @@
+.noPadding{
+    padding: 0px;
+}
+
+.userPic{
+    min-height: 7px;
+    max-height: 45px;
+    border-radius: 50%;
+}

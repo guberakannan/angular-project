@@ -1,0 +1,10 @@
+.header-content{
+    position: absolute;
+    height: 10%;
+    margin-top: 1%;
+}
+
+.header-content h5{
+    color : #F77E1C;
+    font-size: 28px;
+}
