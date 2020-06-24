@@ -14,7 +14,7 @@ ng-sidebar-container{
 }
 
 .menu{
-  margin-top: 3em;
+  margin-top: 2em;
   display: block;
   padding: 0px;
   text-align: center;
@@ -40,8 +40,8 @@ ng-sidebar-container{
 
 .welcomeUser{
   position: relative;
-  top: 10px;
   left: 10px;
+  text-align: center;
   color: #000;
 }
 
