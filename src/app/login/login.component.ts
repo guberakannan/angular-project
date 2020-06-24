@@ -19,14 +19,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User({
-      email: '',
+      name: '',
       password: { pwd: '' }
     });
   }
 
   login() {
     const credentials = {
-      username: this.user.email,
+      username: this.user.name,
       password: this.user.password.pwd
     };
     this.authService.validate(credentials).subscribe(data => {
