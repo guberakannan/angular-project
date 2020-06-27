@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://3.23.117.236:3000'
+  apiUrl: 'https://kpi.today:3000'
 };
