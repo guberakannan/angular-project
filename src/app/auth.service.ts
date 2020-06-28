@@ -27,6 +27,6 @@ export class AuthService {
   }
 
    validate(credentials) {
-    return this.http.post(environment.apiUrl + `/api/authenticate`, credentials, headerOptions);
+    return this.http.post(environment.apiUrl + `/api/users/login`, credentials, headerOptions);
   }
 }
