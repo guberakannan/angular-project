@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FormsModule } from '@angular/forms';
-import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
+import {LocationStrategy, Location, PathLocationStrategy} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
     FormsModule,
   ],
   providers: [
-    {provide : LocationStrategy , useClass: HashLocationStrategy}
+    Location, {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
