@@ -19,10 +19,10 @@
               [(ngModel)]="user.password" name="user.password" required>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
-          <!-- 				
-				<div class="sign-up">
-					Don't have an account? <a href="#">Create One</a>
-				</div> -->
+         	
+		 <div class="sign-up">
+      <button type="button" (click)="newUser()" class="btn btn-primary btn-block">create</button>
+				</div>
         </form>
       </div>
     </div>
