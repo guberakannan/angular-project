@@ -7,17 +7,17 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit, OnDestroy {
-  
+
+  opened = true;
+  username : String = "";
   constructor() { }
 
   ngOnInit() {
-    
+    this.username = JSON.parse(localStorage.getItem('userInfo')).email;
   }
 
   ngOnDestroy() {
   }
-
-  opened = true;
  
   toggleSidebar() {
     this.opened = !this.opened;

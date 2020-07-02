@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     };
     this.authService.validate(credentials).subscribe(data => {
       if (data['success']) {
-        this.authService.setUserInfo(data['data'].token);
+        this.authService.setUserInfo(data['data']);
         this.router.navigate(['/user/dashboard']);
       } else {
         this.invalidCreds = true;
@@ -42,4 +42,28 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  newUser(){
+    const credentials = {
+      user: {
+        email: this.user.name,
+        password: this.user.password
+      }
+    };
+
+    this.authService.newuser(credentials).subscribe(data => {
+      if (data['success']) {
+        this.authService.setUserInfo(data['data']);
+        this.router.navigate(['/user/dashboard']);
+      } else {
+        this.invalidCreds = true;
+      }
+    },
+      error => {
+        this.invalidCreds = true;
+      }
+    );
+    console.log(credentials)
+  }
+
 }
