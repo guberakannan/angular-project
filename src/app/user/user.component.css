@@ -1,6 +1,3 @@
-
-
-
 ng-sidebar-container{
   height: 100vh;
   /* background: linear-gradient(to bottom, #42474d 10%, #ffffff 93%); */
@@ -39,15 +36,11 @@ ng-sidebar-container{
 }
 
 .welcomeUser{
-  position: relative;
-  left: 10px;
-  text-align: center;
+  margin-left: 5px;
+    display: inline;
   color: #000;
 }
 
 .welcomeheader img {
-  float: left;
   background: #555;
 }
-
-

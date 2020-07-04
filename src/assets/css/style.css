@@ -4,6 +4,7 @@
 
 .userPic{
     min-height: 7px;
-    max-height: 45px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
 }
