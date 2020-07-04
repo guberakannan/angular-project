@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment'
+import { env } from 'process';
 
 @Component({
   selector: 'app-user',
@@ -9,16 +11,22 @@ import { BehaviorSubject } from 'rxjs';
 export class UserComponent implements OnInit, OnDestroy {
 
   opened = true;
-  username : String = "";
-  constructor() { }
+  username: String = "";
+  filePath: String = "";
+  logo:  String = "";
+  constructor() {
+    console.log(environment.apiUrl)
+  }
 
   ngOnInit() {
-    this.username = JSON.parse(localStorage.getItem('userInfo')).email;
+    this.username = JSON.parse(localStorage.getItem('userInfo')).name;
+    this.filePath = environment.apiUrl;
+    this.logo = environment.apiUrl + JSON.parse(localStorage.getItem('userInfo')).organization.logo;
   }
 
   ngOnDestroy() {
   }
- 
+
   toggleSidebar() {
     this.opened = !this.opened;
   }

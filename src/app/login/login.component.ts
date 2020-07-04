@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User({
-      email: '',
+      name: '',
       password: ''
     });
   }
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   login() {
     const credentials = {
       user: {
-        email: this.user.name,
+        name: this.user.name,
         password: this.user.password
       }
     };
@@ -43,10 +43,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  /**
   newUser(){
     const credentials = {
       user: {
-        email: this.user.name,
+        name: this.user.name,
         password: this.user.password
       }
     };
@@ -63,7 +64,6 @@ export class LoginComponent implements OnInit {
         this.invalidCreds = true;
       }
     );
-    console.log(credentials)
   }
-
+ */
 }
