@@ -18,7 +18,6 @@ export class UserService {
   }
 
   changePassword(data){
-    
     return this.http.put(environment.apiUrl + '/api/users/change-password', data, { headers: this.returnsHeader(), withCredentials: true });
   }
 }

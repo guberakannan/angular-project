@@ -4,22 +4,18 @@ import { AuthGuardService } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages/pages.component';
 import { ECommerceComponent } from './pages/e-commerce/e-commerce.component';
+import { DummyComponent } from './pages/dummy/dummy.component';
+import { ValidationComponent } from './moduleValidation/validate.component';
 import { UserProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
-  // {
-  //   path: 'pages',
-  //   canActivate: [AuthGuardService],
-  //   loadChildren: () => import('./pages/pages.module')
-  //     .then(m => m.PagesModule),
-  // },
   {
     path: 'pages',
     component: PagesComponent,
     children: [
       {
         path: '',
-        component: ECommerceComponent,
+        component: ValidationComponent,
         canActivate: [AuthGuardService]
       },
       {
@@ -31,7 +27,12 @@ export const routes: Routes = [
         path: 'profile',
         component: UserProfileComponent,
         canActivate: [AuthGuardService]
-      }
+      },
+      {
+        path: 'new-page',
+        component: DummyComponent,
+        canActivate: [AuthGuardService]
+      },
     ]
   },
   
@@ -39,8 +40,8 @@ export const routes: Routes = [
     path: 'user/login',
         component: LoginComponent
   },
-  { path: '', redirectTo: 'pages/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages/dashboard' },
+  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '**', redirectTo: 'pages' },
 ];
 
 const config: ExtraOptions = {

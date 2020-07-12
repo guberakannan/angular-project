@@ -31,9 +31,15 @@ export class LoginComponent implements OnInit {
       }
     };
     this.authService.validate(credentials).subscribe(data => {
-      if (data['success']) {
-        this.authService.setUserInfo(data['data']);
-        this.router.navigate(['/user/dashboard']);
+      if (data['success']) {        
+        if(data['data']['modules'].length){
+          let landingPage = data['data']['modules'];
+          this.authService.setUserInfo(data['data']);
+          this.router.navigate([landingPage[0]]);
+        }else{
+          this.router.navigate(['/user/login']);
+        }
+
       } else {
         this.invalidCreds = true;
       }
