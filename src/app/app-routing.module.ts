@@ -4,7 +4,6 @@ import { AuthGuardService } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages/pages.component';
 import { ECommerceComponent } from './pages/e-commerce/e-commerce.component';
-import { DummyComponent } from './pages/dummy/dummy.component';
 import { ValidationComponent } from './moduleValidation/validate.component';
 import { UserProfileComponent } from './pages/profile/profile.component';
 
@@ -15,7 +14,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ValidationComponent,
+        component: ECommerceComponent,
         canActivate: [AuthGuardService]
       },
       {
@@ -27,12 +26,7 @@ export const routes: Routes = [
         path: 'profile',
         component: UserProfileComponent,
         canActivate: [AuthGuardService]
-      },
-      {
-        path: 'new-page',
-        component: DummyComponent,
-        canActivate: [AuthGuardService]
-      },
+      }
     ]
   },
   

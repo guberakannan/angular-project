@@ -6,10 +6,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home-outline',
     link: '/pages/dashboard',
     home: true,
-  },
-  {
-    title: 'Second Dashboard',
-    icon: 'home-outline',
-    link: '/pages/new-page'
   }
 ];
