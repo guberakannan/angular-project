@@ -8,19 +8,23 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private menuService: NbMenuService,  private router: Router) {
-  }
+  constructor(private menuService: NbMenuService,  private router: Router) {}
 
-  onContecxtItemSelection(title) {
+  onContecxtItemSelection(item) {
+    let title = item.title;
     switch(title){
       case "Log out":
         localStorage.removeItem('userInfo');
-        this.router.navigate(['/user/login']);
-      break;
+        this.router.navigateByUrl('/user/login');
+       break;
 
       case "Profile":
-        this.router.navigate(['/pages/profile']);
-      break;
+        this.router.navigateByUrl('/user/profile');
+       break;
+
+      default:
+        this.router.navigateByUrl(item.link);
+        break;
     }
   }
 
@@ -28,9 +32,7 @@ export class AppComponent implements OnInit {
 
     this.menuService.onItemClick()
       .subscribe((event) => {
-        this.onContecxtItemSelection(event.item.title);
+        this.onContecxtItemSelection(event.item);
       });
   }
-
-  
 }

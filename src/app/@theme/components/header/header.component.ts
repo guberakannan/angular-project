@@ -38,10 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ];
 
   currentTheme = 'default';
-
   userMenu = [  { title: 'Profile' }, { title: 'Log out' }];
-  // userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
-
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -55,10 +52,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.user = JSON.parse(localStorage.getItem('userInfo'));
     this.user.picture = environment.apiUrl + this.user.organization.logo
-
-    // this.userService.getUsers()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

@@ -4,24 +4,28 @@ import { AuthGuardService } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages/pages.component';
 import { ECommerceComponent } from './pages/e-commerce/e-commerce.component';
-import { ValidationComponent } from './moduleValidation/validate.component';
 import { UserProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   {
-    path: 'pages',
+    path: 'user/login',
+    component: LoginComponent
+  },
+  {
+    path: 'dashboard',
     component: PagesComponent,
     children: [
       {
-        path: '',
+        path: '**',
         component: ECommerceComponent,
         canActivate: [AuthGuardService]
-      },
-      {
-        path: 'dashboard',
-        component: ECommerceComponent,
-        canActivate: [AuthGuardService]
-      },
+      }
+    ]
+  },
+  {
+    path: 'user',
+    component: PagesComponent,
+    children: [
       {
         path: 'profile',
         component: UserProfileComponent,
@@ -29,13 +33,8 @@ export const routes: Routes = [
       }
     ]
   },
-  
-  {
-    path: 'user/login',
-        component: LoginComponent
-  },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: 'dashboard' },
 ];
 
 const config: ExtraOptions = {

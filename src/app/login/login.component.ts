@@ -11,7 +11,6 @@ import { User } from '../user/models/user';
 })
 export class LoginComponent implements OnInit {
 
-
   user: User;
   invalidCreds: Boolean = false;
   constructor(private authService: AuthService, private router: Router) { }
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit {
         if(data['data']['modules'].length){
           let landingPage = data['data']['modules'];
           this.authService.setUserInfo(data['data']);
-          this.router.navigate([landingPage[0]]);
+          this.router.navigate([landingPage[0].link]);
         }else{
           this.router.navigate(['/user/login']);
         }

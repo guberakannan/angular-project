@@ -18,18 +18,18 @@ export class AuthService {
   route: string;
   constructor(private http : HttpClient, private router: Router, private location: Location) {
 
-    router.events.subscribe(val => {
-      if(val instanceof NavigationEnd){
-        if(val.url != "/user/login" && val.url != "/pages/profile"){
-          let permitted = JSON.parse(localStorage.getItem('userInfo')).modules;
-          if(permitted.indexOf(val.url) > -1){
-            //
-          }else{
-           this.router.navigate(['/pages']);
-          }
-        }
-      }
-    });
+    // router.events.subscribe(val => {
+    //   if(val instanceof NavigationEnd){
+    //     if(val.url != "/user/login" && val.url != "/user/profile"){
+    //       let permitted = JSON.parse(localStorage.getItem('userInfo')).modules;
+    //       if(permitted.indexOf(val.url) > -1){
+    //         //
+    //       }else{
+    //        this.router.navigate(['/dashboard']);
+    //       }
+    //     }
+    //   }
+    // });
    }
 
    isAuthenticated() {

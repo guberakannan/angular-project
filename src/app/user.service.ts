@@ -22,7 +22,7 @@ export class UserService {
   }
 
   modulePermission(data){
-    return this.http.post(environment.apiUrl + '/api/users/module-permission',data, { headers: this.returnsHeader(), withCredentials: true });
+    return this.http.post(environment.apiUrl + '/api/users/module-permission', {module : data}, { headers: this.returnsHeader(), withCredentials: true });
   }
 
 }

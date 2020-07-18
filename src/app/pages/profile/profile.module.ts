@@ -12,7 +12,7 @@ import {
 
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
-import { UserProfileComponent } from '../profile/profile.component';
+import { UserProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
@@ -34,4 +34,4 @@ import { UserProfileComponent } from '../profile/profile.component';
   providers: [
   ],
 })
-export class ECommerceModule { }
+export class ProfileModule { }

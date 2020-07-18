@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { UserService } from '../../user.service'
+import { Router, NavigationEnd} from '@angular/router';
 
 @Component({
   selector: 'ngx-ecommerce',
@@ -8,13 +10,29 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 })
 export class ECommerceComponent implements OnInit {
-  url: string = "https://app.powerbi.com/view?r=eyJrIjoiMWJlZGRkYzgtY2YzYS00ZDVkLWIzZjQtMGZmYjYwM2Y3ODU4IiwidCI6IjZhOTQ5YzUwLWU1MjgtNGM5YS05YjRlLTU3ZWMyMDc4YTk2OSJ9";
+  url: string = "";
   urlSafe: SafeResourceUrl;
 
-  constructor(public sanitizer: DomSanitizer) { }
-
-  ngOnInit() {
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  constructor( private router: Router, public sanitizer: DomSanitizer, private userService: UserService) { 
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if(event.url != '/user/profile'){
+          this.ngOnInit();
+        }
+      }
+    });
   }
 
+  ngOnInit() {
+    this.userService.modulePermission(this.router.url).subscribe(data => {
+      if(data["success"]){
+        this.url = data["data"];
+        this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+      }
+    },
+    error => {
+      let landingPage = JSON.parse(localStorage.getItem('userInfo')).modules
+      this.router.navigate([landingPage[0].link]);
+    })
+  }
 }
