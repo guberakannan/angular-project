@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
-
+import { AdminLoginComponent } from '../adminlogin/adminlogin.component';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { LoginComponent } from '../login/login.component';
   ],
   declarations: [
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    AdminLoginComponent
   ],
   exports: [UserComponent],
   providers: []

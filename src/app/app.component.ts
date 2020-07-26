@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
 
   constructor(private menuService: NbMenuService,  private router: Router) {}
 
-  onContecxtItemSelection(item) {
+  userNavigation(item) {
     let title = item.title;
     switch(title){
       case "Log out":
@@ -28,11 +28,39 @@ export class AppComponent implements OnInit {
     }
   }
 
+  adminNavigation(item) {
+    let title = item.title;
+    switch(title){
+      case "Log out":
+        localStorage.removeItem('adminInfo');
+        this.router.navigateByUrl('/admins/login');
+       break;
+
+      case "Profile":
+        this.router.navigateByUrl('/admins/profile');
+       break;
+
+      default:
+        this.router.navigateByUrl('/admins/upload');
+        break;
+    }
+  }
+  
+
   ngOnInit(): void {
 
     this.menuService.onItemClick()
       .subscribe((event) => {
-        this.onContecxtItemSelection(event.item);
+
+        switch(this.router.url.split('/')[1]){
+          case "admins":
+            this.adminNavigation(event.item);
+            break;
+          default:
+            this.userNavigation(event.item);
+            
+            break;
+        }
       });
   }
 }

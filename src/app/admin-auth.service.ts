@@ -5,13 +5,13 @@ import { environment } from '../environments/environment';
 const headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
 headers.append('Access-Control-Allow-Headers', 'Content-Type');
-// headers.append('Authorization', this.adminToken);
+
 const headerOptions = { headers: headers, withCredentials: true };
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AdminAuthService {
 
   route: string;
   constructor(private http: HttpClient) {
@@ -19,26 +19,26 @@ export class AuthService {
 
   isAuthenticated() {
 
-    let userData = localStorage.getItem('userInfo')
-    if (userData && JSON.parse(userData)) {
+    let adminData = localStorage.getItem('adminInfo')
+    if (adminData && JSON.parse(adminData)) {
       return true;
     }
     return false;
   }
 
-  setUserInfo(user) {
-    localStorage.setItem('userInfo', JSON.stringify(user));
+  setAdminInfo(admin) {
+    localStorage.setItem('adminInfo', JSON.stringify(admin));
   }
 
-  deleteUserInfo() {
-    localStorage.removeItem('userInfo');
+  deleteAdminInfo() {
+    localStorage.removeItem('adminInfo');
   }
 
   validate(credentials) {
-    return this.http.post(environment.apiUrl + '/api/users/login', credentials, headerOptions);
+    return this.http.post(environment.apiUrl + '/api/admins/login', credentials, headerOptions);
   }
 
   newuser(credentials) {
-    return this.http.post(environment.apiUrl + '/api/users/new-user', credentials);
+    return this.http.post(environment.apiUrl + '/api/admins/new-user', credentials);
   }
 }

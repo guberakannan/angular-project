@@ -1,15 +1,24 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuardService } from './auth-guard.service';
+import { AdminGuardService } from './admin-guard.service';
 import { LoginComponent } from './login/login.component';
+import { AdminLoginComponent } from './adminlogin/adminlogin.component';
 import { PagesComponent } from './pages/pages.component';
+import { AdminPagesComponent } from './adminpages/adminpages.component';
 import { ECommerceComponent } from './pages/e-commerce/e-commerce.component';
+import { AdminECommerceComponent } from './adminpages/e-commerce/e-commerce.component';
 import { UserProfileComponent } from './pages/profile/profile.component';
+import { AdminProfileComponent } from './adminpages/profile/profile.component';
 
 export const routes: Routes = [
   {
     path: 'user/login',
     component: LoginComponent
+  },
+  {
+    path: 'admins/login',
+    component: AdminLoginComponent
   },
   {
     path: 'dashboard',
@@ -19,6 +28,22 @@ export const routes: Routes = [
         path: '**',
         component: ECommerceComponent,
         canActivate: [AuthGuardService]
+      }
+    ]
+  },
+  {
+    path: 'admins',
+    component: AdminPagesComponent,
+    children: [
+      {
+        path: 'profile',
+        component: AdminProfileComponent,
+        canActivate: [AdminGuardService]
+      },
+      {
+        path: 'upload',
+        component: AdminECommerceComponent,
+        canActivate: [AdminGuardService]
       }
     ]
   },

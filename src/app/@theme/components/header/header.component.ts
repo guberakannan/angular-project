@@ -5,6 +5,7 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { Router, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -22,37 +23,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
     {
       value: 'default',
       name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
+    }
   ];
 
   currentTheme = 'default';
-  userMenu = [  { title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService, private router: Router) {
+
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        switch (this.router.url.split('/')[1]) {
+          case "admins":
+            this.user = JSON.parse(localStorage.getItem('adminInfo'));
+            this.user.picture = environment.apiUrl + this.user.organization.logo
+
+            break;
+          default:
+
+            this.user = JSON.parse(localStorage.getItem('userInfo'));
+            this.user.picture = environment.apiUrl + this.user.organization.logo
+            break;
+        }
+      }
+    });
+
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
-    this.user = JSON.parse(localStorage.getItem('userInfo'));
-    this.user.picture = environment.apiUrl + this.user.organization.logo
-
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(

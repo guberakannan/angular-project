@@ -4,8 +4,8 @@ import _ from 'lodash'
 import { environment } from '../../../environments/environment';
 import { User } from '../../user/models/user';
 import { MustMatch } from '../../Validations/validator';
-import { AuthService } from '../../auth.service';
-import { UserService } from '../../user.service';
+import { AdminAuthService } from '../../admin-auth.service';
+import { AdminService } from '../../admin.service';
 
 import { Router } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 
 })
-export class UserProfileComponent implements OnInit {
+export class AdminProfileComponent implements OnInit {
 
   passwordForm: FormGroup;
   user: User;
@@ -24,11 +24,11 @@ export class UserProfileComponent implements OnInit {
   passwordUpdated = false;
   isDisabled = true;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private authService: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService, private adminAuthService: AdminAuthService, private router: Router) {
   }
 
   ngOnInit() {
-    let savedDetails = JSON.parse(localStorage.getItem('userInfo'));
+    let savedDetails = JSON.parse(localStorage.getItem('adminInfo'));
 
     this.user = new User({
       name: _.upperFirst(savedDetails.name),
@@ -57,11 +57,11 @@ export class UserProfileComponent implements OnInit {
       return;
     }
 
-    this.userService.changePassword(this.passwordForm.value).subscribe(data => {
+    this.adminService.changePassword(this.passwordForm.value).subscribe(data => {
       if (data['success']) {
         this.isDisabled = false;
         this.passwordUpdated = true;
-        this.authService.deleteUserInfo();
+        this.adminAuthService.deleteAdminInfo();
         setTimeout(() => {
           this.router.navigate(['/user/login']);
         }, 3000)
