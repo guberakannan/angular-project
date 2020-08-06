@@ -43,6 +43,10 @@ export class AdminService {
         return this.http.get(environment.apiUrl + '/api/admins/schema', { headers: this.returnsHeader(), withCredentials: true });
         break;
 
+      case 'GETACTIVE':
+        return this.http.get(environment.apiUrl + '/api/admins/schema/active', { headers: this.returnsHeader(), withCredentials: true });
+        break;
+
       case 'DELETE':
         return this.http.delete(environment.apiUrl + '/api/admins/schema/' + data.data.schemaIdentifier, { headers: this.returnsHeader(), withCredentials: true });
         break;

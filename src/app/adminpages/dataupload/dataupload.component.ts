@@ -19,7 +19,7 @@ export class DataUploadComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService) {
     this.dynamicTables = [];
-    this.adminService.dynamicSchema({ type: 'GET' }).subscribe(response => {
+    this.adminService.dynamicSchema({ type: 'GETACTIVE' }).subscribe(response => {
       this.dynamicTables = response['data'];
     },
       error => {
