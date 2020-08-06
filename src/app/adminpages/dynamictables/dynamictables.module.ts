@@ -11,7 +11,9 @@ import {
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { AdminECommerceComponent } from './e-commerce.component';
+import { DynamicTablesComponent } from './dynamictables.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 
 @NgModule({
   imports: [
@@ -23,10 +25,11 @@ import { AdminECommerceComponent } from './e-commerce.component';
     NbTabsetModule,
     NbSelectModule,
     NbListModule,
-    NbProgressBarModule
+    NbProgressBarModule,
+    Ng2SmartTableModule
   ],
   declarations: [
-    AdminECommerceComponent
+    DynamicTablesComponent
   ],
   providers: [
   ],

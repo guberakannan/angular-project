@@ -7,7 +7,8 @@ import { AdminLoginComponent } from './adminlogin/adminlogin.component';
 import { PagesComponent } from './pages/pages.component';
 import { AdminPagesComponent } from './adminpages/adminpages.component';
 import { ECommerceComponent } from './pages/e-commerce/e-commerce.component';
-import { AdminECommerceComponent } from './adminpages/e-commerce/e-commerce.component';
+import { DataUploadComponent } from './adminpages/dataupload/dataupload.component';
+import { DynamicTablesComponent } from './adminpages/dynamictables/dynamictables.component';
 import { UserProfileComponent } from './pages/profile/profile.component';
 import { AdminProfileComponent } from './adminpages/profile/profile.component';
 
@@ -41,8 +42,13 @@ export const routes: Routes = [
         canActivate: [AdminGuardService]
       },
       {
+        path: 'dynamic-tables',
+        component: DynamicTablesComponent,
+        canActivate: [AdminGuardService]
+      },
+      {
         path: 'upload',
-        component: AdminECommerceComponent,
+        component: DataUploadComponent,
         canActivate: [AdminGuardService]
       }
     ]

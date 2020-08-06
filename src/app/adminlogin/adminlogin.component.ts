@@ -34,7 +34,7 @@ export class AdminLoginComponent implements OnInit {
         if (data['success']) {        
           if(data['data']['modules'].length){
             this.adminAuthService.setAdminInfo(data['data']);
-            this.router.navigate(['/admins/upload']);
+            this.router.navigate(['/admins/dynamic-tables']);
           }else{
             this.invalidCreds = true;
             this.router.navigate(['/admins/login']);

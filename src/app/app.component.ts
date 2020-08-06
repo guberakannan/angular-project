@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
        break;
 
       default:
-        this.router.navigateByUrl('/admins/upload');
+        this.router.navigateByUrl(item.link);
         break;
     }
   }

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-xxl-6 col-md-12">
+    <nb-card>
+      <nb-card-header>
+        Data Upload
+      </nb-card-header>
+
+      <nb-card-body>
+        <!-- #userlogin="ngForm" -->
+        <form>
+          <div class="form-group row">
+            <div class="col-sm-5 col-md-5">
+              <label for="inputEmail1" class="label col-form-label float-right">
+                Select Table :
+              </label>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+              <nb-select name="tablename" selected="0" class="col-md-3" (selectedChange)="changeTable($event)">
+                <nb-option value="0"> Select Dynamic Table </nb-option>
+                <nb-option *ngFor="let table of dynamicTables" [value]="table.schemaIdentifier"> {{ table.name }}
+                </nb-option>
+              </nb-select>
+            </div>
+          </div>
+
+          <div *ngIf="showFileUpload">
+            <div class="form-group row">
+              <div class="col-sm-5 col-md-5">
+                <label for="fileUpload" class="label col-form-label float-right">
+                  File Upload :
+                </label>
+              </div>
+
+              <div class="col-sm-6 col-md-6">
+                <!-- <input type="file" name="File Upload" id="txtFileUpload" class="btn btn-primary" 
+                  (change)="fileChangeListener($event)" accept=".csv" />-->
+
+                <input class="col-md-12" type="file" name="datasheet" (change)="onFileSelect($event)" />
+              </div>
+
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-7 col-md-7">
+                <button class="btn btn-success btn-s float-right" (click)="onSubmit()" type="button">Upload Table
+                  Data</button></div>
+            </div>
+          </div>
+
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
