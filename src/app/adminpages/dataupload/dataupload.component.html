@@ -18,7 +18,7 @@
             <div class="col-sm-6 col-md-6">
               <nb-select name="tablename" selected="0" class="col-md-3" (selectedChange)="changeTable($event)">
                 <nb-option value="0"> Select Dynamic Table </nb-option>
-                <nb-option *ngFor="let table of dynamicTables" [value]="table.schemaIdentifier"> {{ table.name }}
+                <nb-option *ngFor="let table of dynamicTables" [value]="table.name"> {{ table.name }}
                 </nb-option>
               </nb-select>
             </div>
