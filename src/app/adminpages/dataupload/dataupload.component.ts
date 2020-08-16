@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-dataupload',
@@ -17,7 +18,7 @@ export class DataUploadComponent implements OnInit {
   uploadedFile : any;
   csvFile;
 
-  constructor(private formBuilder: FormBuilder, private adminService: AdminService) {
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService, private router: Router) {
     this.dynamicTables = [];
     this.adminService.dynamicSchema({ type: 'GETACTIVE' }).subscribe(response => {
       this.dynamicTables = response['data'];
@@ -31,6 +32,7 @@ export class DataUploadComponent implements OnInit {
   onSubmit() {
     this.adminService.dataSheet(this.selectedTable, this.csvFile).subscribe(response => {
       alert("Data Uploaded Successfully");
+      window.location.reload();
     }, error => {
       alert("Internal Server Error")
     });
