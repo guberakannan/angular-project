@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-xxl-6 col-md-12">
+    <nb-card>
+      <nb-card-header>
+        <span class="float-left"> Users</span>
+        <button type="button" class="btn btn-primary float-right" (click)="open(createModal, createForm.formType, createForm.formType)"> Create User </button>
+      </nb-card-header>
+
+      <nb-card-body>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <th>Email</th>
+            <th>Designation</th>
+            <th>Last Updated On</th>
+            <th>Actions</th>
+          </thead>
+          <tbody >
+            <ng-template [ngIf] = "showUsers"  [ngIfElse]= "noDataTr">
+            <tr *ngFor="let user of usersList">
+              <td>{{ user.name }}</td>
+              <td>{{ user.designation }}</td>
+              <td>{{ user.lastUpdatedDate |  date:'dd/MM/yyyy'}}</td>
+              <td style="font-size: 25px;"><i class="nb-edit" (click)="open(mymodal, user, 'update')"></i> <i
+                  class="nb-trash" (click)="open(deletemodal, user, deleteForm.formType)"></i></td>
+            </tr>
+          </ng-template>
+          <ng-template #noDataTr><tr class="text-center"><td colspan="4">User details not found</td></tr></ng-template>
+          </tbody>
+        </table>
+
+        <ng-template #createModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Create User</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #createForm="ngForm">
+
+              <div class="form-group">
+                <label for="username">User Email</label>
+                <input type="text" class="form-control" id="username" placeholder="User Email" name="username"
+                [(ngModel)]="name" required>
+              </div>
+              <div class="form-group">
+                <label for="userpwd">User Password</label>
+                <input type="password" class="form-control" id="userpwd" placeholder="User Password" name="password"
+                [(ngModel)]="password" required>
+              </div>
+              <div class="form-group">
+                <label for="designation">Designation</label>
+                <input type="text" class="form-control" id="designation" placeholder="Designation"
+                  name="designation" [(ngModel)]="designation" required>
+              </div>
+              <div class="form-group">
+                <label for="designation">Modules</label>
+                <ng-select placeholder="Select Modules" name="modules" [items]="allModules" bindLabel="title" bindValue="_id" [hideSelected] = true appendTo="body"
+                multiple="true"
+                [searchable]="true" 
+                [clearable]="true" [(ngModel)]="userModules">
+                </ng-select>
+              </div>
+            </form>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="createUser(name, password, designation, userModules)">Create User</button>
+            </div>
+          </div>
+          
+        </ng-template>
+
+        <ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Update User</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #updateForm="ngForm">
+              <div class="form-group">
+                <label for="username">User Email</label>
+                <input type="text" class="form-control" id="username" placeholder="User Email" name="username"
+                [(ngModel)]="updatename" required>
+              </div>
+              <div class="form-group">
+                <label for="designation">Designation</label>
+                <input type="text" class="form-control" id="designation" placeholder="Designation"
+                  name="designation" [(ngModel)]="updatedesignation" required>
+              </div>
+              <div class="form-group">
+                <label for="designation">Modules</label>
+                <ng-select placeholder="Select Modules" name="modules" [items]="allModules" bindLabel="title" bindValue="_id" [hideSelected] = true appendTo="body"
+                multiple="true" [searchable]="true" [clearable]="true" [(ngModel)]="selectedModules">
+                </ng-select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="updateUser()">Update User</button>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #deletemodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delete User</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #deleteForm="ngForm">
+
+              <input name="id" style="display:none" [(ngModel)]="deleteForm.id" [value] = "deleteForm.id">
+              
+              <div class="form-group">
+                <label>Are you sure want to delete the user ?</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="deleteUser()">Delete User</button>
+            </div>
+          </div>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

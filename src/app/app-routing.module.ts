@@ -11,6 +11,8 @@ import { DataUploadComponent } from './adminpages/dataupload/dataupload.componen
 import { DynamicTablesComponent } from './adminpages/dynamictables/dynamictables.component';
 import { UserProfileComponent } from './pages/profile/profile.component';
 import { AdminProfileComponent } from './adminpages/profile/profile.component';
+import { UserDetailsComponent } from './adminpages/usersdata/usersdata.component';
+import { ModulesComponent } from './adminpages/modules/modules.component';
 
 export const routes: Routes = [
   {
@@ -22,20 +24,19 @@ export const routes: Routes = [
     component: AdminLoginComponent
   },
   {
-    path: 'dashboard',
-    component: PagesComponent,
-    children: [
-      {
-        path: '**',
-        component: ECommerceComponent,
-        canActivate: [AuthGuardService]
-      }
-    ]
-  },
-  {
     path: 'admins',
     component: AdminPagesComponent,
     children: [
+      {
+        path: 'users-data',
+        component: UserDetailsComponent,
+        canActivate: [AdminGuardService]
+      },
+      {
+        path: 'modules',
+        component: ModulesComponent,
+        canActivate: [AdminGuardService]
+      },
       {
         path: 'profile',
         component: AdminProfileComponent,
@@ -61,11 +62,21 @@ export const routes: Routes = [
         path: 'profile',
         component: UserProfileComponent,
         canActivate: [AuthGuardService]
-      }
+      },
+      {
+        path: 'pages',
+        children: [
+          {
+            path: '**',
+            component: ECommerceComponent,
+            canActivate: [AuthGuardService]
+          }
+        ]
+      },
     ]
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: '', redirectTo: 'user/pages', pathMatch: 'full' },
+  { path: '**', redirectTo: 'user/pages' },
 ];
 
 const config: ExtraOptions = {

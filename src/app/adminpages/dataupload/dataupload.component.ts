@@ -34,7 +34,7 @@ export class DataUploadComponent implements OnInit {
       alert("Data Uploaded Successfully");
       window.location.reload();
     }, error => {
-      alert("Internal Server Error")
+      alert('Issue is on our side. Please try again later')
     });
   }
 

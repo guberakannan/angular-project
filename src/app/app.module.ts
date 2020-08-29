@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import {
   NbChatModule,
@@ -35,6 +36,7 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgSelectModule, 
     Ng2SmartTableModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

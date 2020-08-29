@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-xxl-6 col-md-12">
+    <nb-card>
+      <nb-card-header>
+        <span class="float-left"> Modules </span>
+        <button type="button" class="btn btn-primary float-right" (click)="open(createModal, '', 'create')"> Create
+          Module </button>
+      </nb-card-header>
+
+      <nb-card-body>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <th>Name</th>
+            <th>Parent</th>
+            <th>End Point</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <ng-template [ngIf]="showModules" [ngIfElse]="noDataTr">
+              <tr *ngFor="let module of modulesList">
+                <td>{{ module.title }}</td>
+                <td>{{ module.parent }}</td>
+                <td>{{ module.link.split("/user/pages/")[1] }}</td>
+                <td style="font-size: 25px;"><i class="nb-edit" (click)="open(mymodal, module, 'update')"></i> <i
+                    class="nb-trash" (click)="open(deletemodal, module, 'delete')"></i></td>
+              </tr>
+            </ng-template>
+            <ng-template #noDataTr>
+              <tr class="text-center">
+                <td colspan="4">No modules created yet</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+
+        <ng-template #createModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Create Module</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #createForm="ngForm">
+
+              <div class="form-group">
+                <label for="name">Module Name</label>
+                <input type="text" class="form-control" placeholder="Module Name" name="name" [(ngModel)]="name"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="parent">Parent Module</label>
+                <input type="text" class="form-control" placeholder="Parent Name" name="parent" [(ngModel)]="parent"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="link">Module End Point</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">/user/pages/</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Module Link" name="link" [(ngModel)]="link"
+                    required>
+                </div>
+
+
+              </div>
+              <div class="form-group">
+                <label for="content">Module Content</label>
+                <textarea class="form-control" name="content" cols="30" rows="5" [(ngModel)]="content"
+                  required></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="createModule(name, parent, link, content)">Create
+                Module</button>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Update Module</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #updateForm="ngForm">
+              <div class="form-group">
+                <label for="updatename">Module Name</label>
+                <input type="text" class="form-control" placeholder="Module Name" name="updatename"
+                  [(ngModel)]="updatename" required>
+              </div>
+              <div class="form-group">
+                <label for="updateparent">Parent Module</label>
+                <input type="text" class="form-control" placeholder="Parent Name" name="updateparent"
+                  [(ngModel)]="updateparent" required>
+              </div>
+              <div class="form-group">
+                <label for="updatelink">Module End Point</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">/user/pages/</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Module Link" name="updatelink"
+                    [(ngModel)]="updatelink" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="content">Module Content</label>
+                <textarea class="form-control" name="updatecontent" cols="30" rows="5" [(ngModel)]="updatecontent"
+                  required></textarea>
+              </div>
+            </form>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="updateModule()">Update Module</button>
+            </div>
+          </div>
+
+        </ng-template>
+
+        <ng-template #deletemodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delete Module</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #deleteForm="ngForm">
+              <input name="id" style="display:none" [(ngModel)]="deleteForm.id" [value]="deleteForm.id">
+
+              <div class="form-group">
+                <label>Are you sure want to delete the module ?</label>
+              </div>
+            </form>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="deleteModule()">Delete Module</button>
+            </div>
+          </div>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

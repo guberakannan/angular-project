@@ -1,0 +1,5 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+button:focus{
+    outline: none !important;
+}

@@ -32,8 +32,43 @@ export class AdminService {
     return this.http.post(environment.apiUrl + '/api/admins/module-permission', { module: data }, { headers: this.returnsHeader(), withCredentials: true });
   }
 
-  dynamicSchema(data) {
+  getModules() {
+    return this.http.get(environment.apiUrl + '/api/admins/modules', { headers: this.returnsHeader(), withCredentials: true });
+  }
 
+  createUser(data) {
+    return this.http.post(environment.apiUrl + '/api/users', {user : data}, { headers: this.returnsHeader(), withCredentials: true });
+  }
+
+  updateUser(data) {
+    return this.http.put(environment.apiUrl + '/api/users', data, { headers: this.returnsHeader(), withCredentials: true });
+  }
+
+  deleteUser(data) {
+    return this.http.delete(environment.apiUrl + '/api/users/' + data.id, { headers: this.returnsHeader(), withCredentials: true });
+  }
+
+  createModule(data){
+    return this.http.post(environment.apiUrl + '/api/admins/modules', data, { headers: this.returnsHeader(), withCredentials: true });
+  }
+
+  updateModule(data) {
+    return this.http.put(environment.apiUrl + '/api/admins/modules', data, { headers: this.returnsHeader(), withCredentials: true });
+  }
+
+  deleteModule(data) {
+    return this.http.delete(environment.apiUrl + '/api/admins/modules/' + data.id, { headers: this.returnsHeader(), withCredentials: true });
+  }
+
+  users(data) {
+    switch (data.type) {
+      case 'GET':
+        return this.http.get(environment.apiUrl + '/api/users', { headers: this.returnsHeader(), withCredentials: true });
+        break;
+    }
+  }
+
+  dynamicSchema(data) {
     switch (data.type) {
       case 'CREATE':
         return this.http.post(environment.apiUrl + '/api/admins/schema', data.data, { headers: this.returnsHeader(), withCredentials: true });
