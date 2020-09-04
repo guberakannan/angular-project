@@ -97,11 +97,12 @@ export class UserDetailsComponent {
     this.adminService.createUser(userData).subscribe(response => {
       window.location.reload();
     }, (error) => {
-      if (error.error.errors != undefined) {
-        alert(error.error.errors.message)
+      
+      if (error.error.errors != undefined && typeof error.error.errors === "string") {
+        alert(error.error.errors)
       } else {
-        if (error.error != undefined && error.error.error != undefined && typeof error.error.error === "string") {
-          alert(error.error.error)
+        if (error.error.errors != undefined && typeof error.error.errors !== "string") {
+          alert(error.error.errors.message)
         } else {
           alert('Issue is on our side. Please try again later')
         }
@@ -115,11 +116,11 @@ export class UserDetailsComponent {
     this.adminService.updateUser(updateData).subscribe(response => {
       window.location.reload();
     }, (error) => {
-      if (error.error.errors != undefined) {
-        alert(error.error.errors.message)
+      if (error.error.errors != undefined && typeof error.error.errors === "string") {
+        alert(error.error.errors)
       } else {
-        if (error.error != undefined && error.error.error != undefined && typeof error.error.error === "string") {
-          alert(error.error.error)
+        if (error.error.errors != undefined && typeof error.error.errors !== "string") {
+          alert(error.error.errors.message)
         } else {
           alert('Issue is on our side. Please try again later')
         }
@@ -132,11 +133,11 @@ export class UserDetailsComponent {
     this.adminService.deleteUser(updateData).subscribe(response => {
       window.location.reload();
     }, (error) => {
-      if (error.error.errors != undefined) {
-        alert(error.error.errors.message)
+      if (error.error.errors != undefined && typeof error.error.errors === "string") {
+        alert(error.error.errors)
       } else {
-        if (error.error != undefined && error.error.error != undefined && typeof error.error.error === "string") {
-          alert(error.error.error)
+        if (error.error.errors != undefined && typeof error.error.errors !== "string") {
+          alert(error.error.errors.message)
         } else {
           alert('Issue is on our side. Please try again later')
         }

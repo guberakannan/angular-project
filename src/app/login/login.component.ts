@@ -48,28 +48,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  /**
-  newUser(){
-    const credentials = {
-      user: {
-        name: this.user.name,
-        password: this.user.password
-      }
-    };
-
-    this.authService.newuser(credentials).subscribe(data => {
-      if (data['success']) {
-        this.authService.setUserInfo(data['data']);
-        this.router.navigate(['/user/dashboard']);
-      } else {
-        this.invalidCreds = true;
-      }
-    },
-      error => {
-        this.invalidCreds = true;
-      }
-    );
-  }
- */
 }
