@@ -1,0 +1,26 @@
+<div class="global-container">
+  <div class="card login-form">
+    <div class="card-body">
+      <h3 class="card-title text-center">Super Admin Login</h3>
+      <div class="card-text">
+        <div *ngIf="invalidCreds" class="alert alert-danger" role="alert">
+          <strong>Incorrect Email or password</strong>
+        </div>
+        <form #userlogin="ngForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="username">Email</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter Email" [(ngModel)]="user.name"
+              name="user.email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <!-- <a href="#" style="float:right;font-size:12px;">Forgot password?</a> -->
+            <input type="password" class="form-control" id="password" placeholder="Enter password"
+              [(ngModel)]="user.password" name="user.password" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

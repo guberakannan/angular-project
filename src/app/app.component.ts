@@ -45,6 +45,25 @@ export class AppComponent implements OnInit {
         break;
     }
   }
+
+  superAdminNavigation(item){
+    let title = item.title;
+    switch(title){
+      case "Log out":
+        localStorage.removeItem('superadminInfo');
+        this.router.navigateByUrl('/super-admins/login');
+       break;
+
+      case "Profile":
+        this.router.navigateByUrl('/super-admins/profile');
+       break;
+
+      default:
+        this.router.navigateByUrl(item.link);
+        break;
+    }
+  }
+
   
 
   ngOnInit(): void {
@@ -56,6 +75,9 @@ export class AppComponent implements OnInit {
           case "admins":
             this.adminNavigation(event.item);
             break;
+          case "super-admins":
+              this.superAdminNavigation(event.item);
+              break;
           default:
             this.userNavigation(event.item);
             

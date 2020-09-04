@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminAuthService } from '../admin-auth.service';
+import { SuperAdminsAuthService } from '../super-admins-auth.service';
 import { Router } from '@angular/router';
 import { User } from '../user/models/user';
 
 
 @Component({
-  selector: 'admin-login',
-  templateUrl: './adminlogin.component.html',
-  styleUrls: ['./adminlogin.component.css']
+  selector: 'superadmins-login',
+  templateUrl: './superadminslogin.component.html',
+  styleUrls: ['./superadminslogin.component.css']
 })
-export class AdminLoginComponent implements OnInit {
+export class SuperAdminLoginComponent implements OnInit {
 
   user: User;
   invalidCreds: Boolean = false;
-  constructor(private adminAuthService: AdminAuthService, private router: Router) { }
+  constructor(private superAdminAuthService: SuperAdminsAuthService, private router: Router) { }
 
   ngOnInit() {
     this.user = new User({
@@ -30,10 +30,10 @@ export class AdminLoginComponent implements OnInit {
         password: this.user.password
       }
     };
-    this.adminAuthService.validate(credentials).subscribe(data => {      
+    this.superAdminAuthService.validate(credentials).subscribe(data => {      
         if (data['success']) {        
-          this.adminAuthService.setAdminInfo(data['data']);
-          this.router.navigate(['/admins/users-data']);
+          this.superAdminAuthService.setSuperAdminInfo(data['data']);
+          this.router.navigate(['/super-admins/organizations']);
         } else {
           this.invalidCreds = true;
         }

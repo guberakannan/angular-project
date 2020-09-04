@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-xxl-6 col-md-12">
+    <nb-card>
+      <nb-card-header>
+        <span class="float-left"> Organizations</span>
+        <button type="button" class="btn btn-primary float-right" (click)="open(createModal, createForm.formType, createForm.formType)"> Create Organization </button>
+      </nb-card-header>
+
+      <nb-card-body>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <th>Name</th>
+            <th>Logo</th>
+            <th>Actions</th>
+          </thead>
+          <tbody >
+            <ng-template [ngIf] = "showUsers"  [ngIfElse]= "noDataTr">
+            <tr *ngFor="let user of organizationsList">
+              <td>{{ user.name }}</td>
+              <td>{{ user.logo }}</td>
+              <td style="font-size: 25px;"><i class="nb-edit" (click)="open(mymodal, user, 'update')"></i> <i
+                  class="nb-trash" (click)="open(deletemodal, user, deleteForm.formType)"></i></td>
+            </tr>
+          </ng-template>
+          <ng-template #noDataTr><tr class="text-center"><td colspan="4">Organizations details not found</td></tr></ng-template>
+          </tbody>
+        </table>
+
+        <ng-template #createModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Create Organization</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #createForm="ngForm">
+
+              <div class="form-group">
+                <label for="username">Organization Name</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter Organization Name" name="name" [(ngModel)]="name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="designation">Organization Logo</label>
+                <input type="text" class="form-control" id="logo" placeholder="Organization Logo"
+                  name="logo" [(ngModel)]="logo" required>
+              </div>
+              
+            </form>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="createOrg(name, logo)">Create Organization</button>
+            </div>
+          </div>
+          
+        </ng-template>
+
+        <ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Update Organization</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #updateForm="ngForm">
+              <div class="form-group">
+                <label for="username">Organization Name</label>
+                <input type="text" class="form-control" id="username" placeholder="Organization Name" name="username"
+                [(ngModel)]="updatename" required>
+              </div>
+              <div class="form-group">
+                <label for="designation">Organization Logo</label>
+                <input type="text" class="form-control" id="logo" placeholder="Organization Logo"
+                  name="logo" [(ngModel)]="updatelogo" required>
+              </div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="updateOrg()">Update Organization</button>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #deletemodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delete Organization</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #deleteForm="ngForm">
+
+              <input name="id" style="display:none" [(ngModel)]="deleteForm.id" [value] = "deleteForm.id">
+              
+              <div class="form-group">
+                <label>Are you sure want to delete the organization ?</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="deleteOrg()">Delete Organization</button>
+            </div>
+          </div>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

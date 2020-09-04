@@ -2,6 +2,7 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuardService } from './auth-guard.service';
 import { AdminGuardService } from './admin-guard.service';
+import { SuperAdminsGuardService } from './super-admins-guard.service';
 import { LoginComponent } from './login/login.component';
 import { AdminLoginComponent } from './adminlogin/adminlogin.component';
 import { PagesComponent } from './pages/pages.component';
@@ -13,6 +14,10 @@ import { UserProfileComponent } from './pages/profile/profile.component';
 import { AdminProfileComponent } from './adminpages/profile/profile.component';
 import { UserDetailsComponent } from './adminpages/usersdata/usersdata.component';
 import { ModulesComponent } from './adminpages/modules/modules.component';
+import { SuperAdminLoginComponent } from './superadminslogin/superadminslogin.component';
+import { SuperAdminsPagesComponent } from './superadminspages/superadminspages.component';
+import { OrganizationsComponent } from './superadminspages/organizations/organizations.component';
+import {SuperAdminProfileComponent } from "./superadminspages/profile/profile.component";
 
 export const routes: Routes = [
   {
@@ -22,6 +27,10 @@ export const routes: Routes = [
   {
     path: 'admins/login',
     component: AdminLoginComponent
+  },
+  {
+    path: 'super-admins/login',
+    component: SuperAdminLoginComponent
   },
   {
     path: 'admins',
@@ -51,6 +60,23 @@ export const routes: Routes = [
         path: 'upload',
         component: DataUploadComponent,
         canActivate: [AdminGuardService]
+      }
+    ]
+  },
+  {
+    path: 'super-admins',
+    component: SuperAdminsPagesComponent,
+    children: [
+      {
+        path: 'profile',
+        component: SuperAdminProfileComponent,
+        canActivate: [SuperAdminsGuardService]
+      },
+      
+      {
+        path: 'organizations',
+        component: OrganizationsComponent,
+        canActivate: [SuperAdminsGuardService]
       }
     ]
   },
