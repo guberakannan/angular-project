@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.user.picture = this.apiUrl + this.user.organization.logo
             break;
           default:
-            this.superAdmin = true;
+            this.superAdmin = false;
             this.user = JSON.parse(localStorage.getItem('userInfo'));
             this.user.picture = this.apiUrl + this.user.organization.logo
             break;

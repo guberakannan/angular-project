@@ -4,10 +4,10 @@
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
     <ng-template [ngIf]="superAdmin" [ngIfElse]="noDataTr">
-      <a class="logo" href="#" >KPI<span>.today</span></a>
+      <a class="logo" >KPI<span>.today</span></a>
     </ng-template>
     <ng-template #noDataTr>
-      <a class="logo" href="#" ><img width="40px" src="{{user.picture}}" /></a>
+      <a class="logo"><img width="40px" src="{{user.picture}}" /></a>
     </ng-template>
     
   </div>
