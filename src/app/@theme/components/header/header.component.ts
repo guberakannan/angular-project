@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
+  superAdmin: boolean = false;
+  apiUrl = environment.apiUrl;
 
   themes = [
     {
@@ -39,16 +41,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         switch (this.router.url.split('/')[1]) {
           case "admins":
+            this.superAdmin = false;
             this.user = JSON.parse(localStorage.getItem('adminInfo'));
-            this.user.picture = environment.apiUrl + this.user.organization.logo
+            this.user.picture = this.apiUrl + this.user.organization.logo
             break;
           case "super-admins":
+            this.superAdmin = true;
             this.user = JSON.parse(localStorage.getItem('superadminInfo'));
-            this.user.picture = environment.apiUrl + this.user.organization.logo
+            this.user.picture = this.apiUrl + this.user.organization.logo
             break;
           default:
+            this.superAdmin = true;
             this.user = JSON.parse(localStorage.getItem('userInfo'));
-            this.user.picture = environment.apiUrl + this.user.organization.logo
+            this.user.picture = this.apiUrl + this.user.organization.logo
             break;
         }
       }

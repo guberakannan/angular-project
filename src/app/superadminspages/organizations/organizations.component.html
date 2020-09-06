@@ -3,7 +3,8 @@
     <nb-card>
       <nb-card-header>
         <span class="float-left"> Organizations</span>
-        <button type="button" class="btn btn-primary float-right" (click)="open(createModal, createForm.formType, createForm.formType)"> Create Organization </button>
+        <button type="button" class="btn btn-primary float-right"
+          (click)="open(createModal, createForm.formType, createForm.formType)"> Create Organization </button>
       </nb-card-header>
 
       <nb-card-body>
@@ -13,16 +14,20 @@
             <th>Logo</th>
             <th>Actions</th>
           </thead>
-          <tbody >
-            <ng-template [ngIf] = "showUsers"  [ngIfElse]= "noDataTr">
-            <tr *ngFor="let user of organizationsList">
-              <td>{{ user.name }}</td>
-              <td>{{ user.logo }}</td>
-              <td style="font-size: 25px;"><i class="nb-edit" (click)="open(mymodal, user, 'update')"></i> <i
-                  class="nb-trash" (click)="open(deletemodal, user, deleteForm.formType)"></i></td>
-            </tr>
-          </ng-template>
-          <ng-template #noDataTr><tr class="text-center"><td colspan="4">Organizations details not found</td></tr></ng-template>
+          <tbody>
+            <ng-template [ngIf]="showUsers" [ngIfElse]="noDataTr">
+              <tr *ngFor="let user of organizationsList">
+                <td>{{ user.name }}</td>
+                <td><img width="50px" src="{{apiurl + user.logo}}" /></td>
+                <td style="font-size: 25px;"><i class="nb-edit" (click)="open(mymodal, user, 'update')"></i> <i
+                    class="nb-trash" (click)="open(deletemodal, user, deleteForm.formType)"></i></td>
+              </tr>
+            </ng-template>
+            <ng-template #noDataTr>
+              <tr class="text-center">
+                <td colspan="4">Organizations details not found</td>
+              </tr>
+            </ng-template>
           </tbody>
         </table>
 
@@ -34,25 +39,22 @@
             </button>
           </div>
           <div class="modal-body">
-            <form #createForm="ngForm">
-
+            <form>
               <div class="form-group">
                 <label for="username">Organization Name</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter Organization Name" name="name" [(ngModel)]="name" required>
+                <input type="text" class="form-control" id="username" placeholder="Enter Organization Name" name="name"
+                  [(ngModel)]="name" required>
               </div>
-              
+
               <div class="form-group">
-                <label for="designation">Organization Logo</label>
-                <input type="text" class="form-control" id="logo" placeholder="Organization Logo"
-                  name="logo" [(ngModel)]="logo" required>
+                <label for="fileUpload" class="label col-form-label">Organization Logo</label>
+                <div><input type="file" name="datasheet" (change)="onFileSelect($event)" /></div>
               </div>
-              
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="createOrg(name)">Create Organization</button>
+              </div>
             </form>
-            <div class="form-group text-right">
-              <button type="button" class="btn btn-primary" (click)="createOrg(name, logo)">Create Organization</button>
-            </div>
           </div>
-          
         </ng-template>
 
         <ng-template #mymodal let-modal>
@@ -67,14 +69,13 @@
               <div class="form-group">
                 <label for="username">Organization Name</label>
                 <input type="text" class="form-control" id="username" placeholder="Organization Name" name="username"
-                [(ngModel)]="updatename" required>
+                  [(ngModel)]="updatename" required>
               </div>
               <div class="form-group">
-                <label for="designation">Organization Logo</label>
-                <input type="text" class="form-control" id="logo" placeholder="Organization Logo"
-                  name="logo" [(ngModel)]="updatelogo" required>
+                <label for="fileUpload" class="label col-form-label">Organization Logo</label>
+                <div><input type="file" name="datasheet" (change)="onFileUpdate($event)" /></div>
               </div>
-              
+
             </form>
           </div>
           <div class="modal-footer">
@@ -94,8 +95,8 @@
           <div class="modal-body">
             <form #deleteForm="ngForm">
 
-              <input name="id" style="display:none" [(ngModel)]="deleteForm.id" [value] = "deleteForm.id">
-              
+              <input name="id" style="display:none" [(ngModel)]="deleteForm.id" [value]="deleteForm.id">
+
               <div class="form-group">
                 <label>Are you sure want to delete the organization ?</label>
               </div>

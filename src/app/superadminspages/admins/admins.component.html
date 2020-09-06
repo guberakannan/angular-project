@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-xxl-6 col-md-12">
+    <nb-card>
+      <nb-card-header>
+        <span class="float-left"> Admins </span>
+        <button type="button" class="btn btn-primary float-right" (click)="open(createModal, createForm.formType, createForm.formType)"> Create Admin </button>
+      </nb-card-header>
+
+      <nb-card-body>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <th>Email</th>
+            <th>Organization</th>
+            <th>Actions</th>
+          </thead>
+          <tbody >
+            <ng-template [ngIf] = "showAdmins"  [ngIfElse]= "noDataTr">
+            <tr *ngFor="let admin of adminsList">
+              <td>{{ admin.name }}</td>
+              <td>{{ admin.organization }}</td>
+              <td style="font-size: 25px;"><i class="nb-edit" (click)="open(mymodal, admin, 'update')"></i> <i
+                  class="nb-trash" (click)="open(deletemodal, admin, deleteForm.formType)"></i></td>
+            </tr>
+          </ng-template>
+          <ng-template #noDataTr><tr class="text-center"><td colspan="3">Admin details not found</td></tr></ng-template>
+          </tbody>
+        </table>
+
+        <ng-template #createModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Create Admin</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #createForm="ngForm">
+
+              <div class="form-group">
+                <label for="username">Admin Email</label>
+                <input type="text" class="form-control" id="username" placeholder="Admin Email" name="adminname"
+                [(ngModel)]="name" required>
+              </div>
+              <div class="form-group">
+                <label for="userpwd">Admin Password</label>
+                <input type="password" class="form-control" id="userpwd" placeholder="Admin Password" name="password" [(ngModel)]="password" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="Organization">Organization</label>
+                <ng-select placeholder="Select Organization" name="Organization" [items]="allOrganizations" bindLabel="name" bindValue="_id" [hideSelected] = true appendTo="body" [searchable]="true" [clearable]="true" [(ngModel)]="organization">
+                </ng-select>
+              </div>
+            </form>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="createAdmin(name, password, organization)">Create Admin</button>
+            </div>
+          </div>
+          
+        </ng-template>
+
+        <ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Update Admin</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #updateForm="ngForm">
+              <div class="form-group">
+                <label for="adminname">Admin Email</label>
+                <input type="text" class="form-control" placeholder="Admin Email" name="adminname"
+                [(ngModel)]="updatename" required>
+              </div>
+              <div class="form-group">
+                <label for="organization">Organization</label>
+                <ng-select placeholder="Select Organization" name="organization" [items]="allOrganizations" bindLabel="name" bindValue="name" [hideSelected] = true appendTo="body" [searchable]="true" [(ngModel)]="updateOrganization">
+                </ng-select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="updateAdmin()">Update Admin</button>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #deletemodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Delete Admin</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #deleteForm="ngForm">
+
+              <input name="id" style="display:none" [(ngModel)]="deleteForm.id" [value] = "deleteForm.id">
+              
+              <div class="form-group">
+                <label>Are you sure want to delete the admin ?</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" (click)="deleteAdmin()">Delete Admin</button>
+            </div>
+          </div>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

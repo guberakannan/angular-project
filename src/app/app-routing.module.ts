@@ -17,7 +17,8 @@ import { ModulesComponent } from './adminpages/modules/modules.component';
 import { SuperAdminLoginComponent } from './superadminslogin/superadminslogin.component';
 import { SuperAdminsPagesComponent } from './superadminspages/superadminspages.component';
 import { OrganizationsComponent } from './superadminspages/organizations/organizations.component';
-import {SuperAdminProfileComponent } from "./superadminspages/profile/profile.component";
+import { SuperAdminProfileComponent } from "./superadminspages/profile/profile.component";
+import { AdminsComponent } from "./superadminspages/admins/admins.component";
 
 export const routes: Routes = [
   {
@@ -72,7 +73,11 @@ export const routes: Routes = [
         component: SuperAdminProfileComponent,
         canActivate: [SuperAdminsGuardService]
       },
-      
+      {
+        path: 'admins',
+        component: AdminsComponent,
+        canActivate: [SuperAdminsGuardService]
+      },
       {
         path: 'organizations',
         component: OrganizationsComponent,

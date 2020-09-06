@@ -6,4 +6,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'people',
     link: '/super-admins/organizations'
   },
+  {
+    title: 'Admins',
+    icon: 'people',
+    link: '/super-admins/admins'
+  }
 ];
